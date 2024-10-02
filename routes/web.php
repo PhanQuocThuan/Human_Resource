@@ -69,7 +69,7 @@ Route::resource('admin/reports', AdminReportController::class)
 Route::get('/admin/reports/employees', [AdminReportController::class, 'employeeReport'])->name('admin.reports.employees');
 Route::get('/admin/reports/departments', [AdminReportController::class, 'departmentReport'])->name('admin.reports.departments');
 Route::get('/admin/reports/shifts', [AdminReportController::class, 'shiftReport'])->name('admin.reports.shifts');
-Route::get('/admin/reports/filter', [AdminReportController::class, 'filter'])->name('admin.reports.filter');
+// Route::get('/admin/reports/filter', [AdminReportController::class, 'filter'])->name('admin.reports.filter');
 
 Route::get('/admin/histories', [AdminHistoryController::class, 'index'])->name('admin.histories.index');
 Route::get('/admin/histories/{id}/edit', [AdminHistoryController::class, 'edit'])->name('admin.histories.edit');

@@ -36,7 +36,7 @@ class AdminEmployeeController extends Controller
         return view('admin.employees.create')->with("viewData", $viewData);
     }
 
-    public function store(Request $request, $id)
+    public function store(Request $request)
     {
         // thông tin nhập vào form
         $request->validate([

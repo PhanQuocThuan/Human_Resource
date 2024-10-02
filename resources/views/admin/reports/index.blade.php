@@ -2,13 +2,14 @@
 @section('content')
     <div class="container">
         <h1>{{$title}}</h1>
+        {{-- <h1>{{$viewData['title']}}</h1> --}}
         <ul>
             <li><a href="{{route('admin.reports.employees')}}">Employees Report</a></li>
             <li><a href="{{route('admin.reports.departments')}}">Departments Report</a></li>
             <li><a href="{{route('admin.reports.shifts')}}">Shifts Report</a></li>
         </ul>
     </div>
-    <form action="{{ route('admin.reports.filter') }}" method="GET">
+    <form action="{{ route('admin.reports.index') }}" method="GET">
         @csrf
         <label for="department">Department:</label>
         <select name="department_id" id="department">
@@ -16,6 +17,9 @@
             @foreach ($departments as $department)
                 <option value="{{ $department->DepartmentID }}">{{ $department->Name }}</option>
             @endforeach
+            {{-- @foreach ($viewData['departments'] as $department)
+                <option value="{{ $department->DepartmentID }}">{{ $department->Name }}</option>
+            @endforeach --}}
         </select>
 
         <label for="shift">Shift:</label>
@@ -24,6 +28,9 @@
             @foreach ($shifts as $shift)
                 <option value="{{ $shift->ShiftID }}">{{ $shift->Name }}</option>
             @endforeach
+            {{-- @foreach ($viewData['shifts'] as $shift)
+                <option value="{{ $shift->ShiftID }}">{{ $shift->Name }}</option>
+            @endforeach --}}
         </select>
 
         <label for="start_date">Start Date:</label>
@@ -52,9 +59,16 @@
                     <td>{{ optional($result->shift)->Name }}</td>
                     <td>{{ $result->StartDate }}</td>
                     <td>{{ $result->EndDate }}</td>
-
                 </tr>
             @endforeach
+            {{-- @foreach ($viewData['results'] as $result)
+                <tr>
+                    <td>{{ optional($result->department)->Name }}</td>
+                    <td>{{ optional($result->shift)->Name }}</td>
+                    <td>{{ $result->StartDate }}</td>
+                    <td>{{ $result->EndDate }}</td>
+                </tr>
+            @endforeach --}}
         </tbody>
     </table>
     

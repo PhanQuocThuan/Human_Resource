@@ -9,16 +9,16 @@ class History extends Model
 {
     use HasFactory;
 
-    protected $table = 'employee_department_history';
+    protected $table = 'employee_department_history';//chỉ định bảng
 
-    protected $fillable = [
+    protected $fillable = [//cho phép tạo hoặc cập nhật lại các trường
         'BusinessEntityID',
         'DepartmentID',
         'ShiftID'
     ];
 
     public function employee()
-    {
+    {//                                           khóa ngoại this     khóa chính của employees
         return $this->belongsTo(Employee::class, 'BusinessEntityID', 'BusinessEntityID');
     }
 

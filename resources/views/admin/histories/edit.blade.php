@@ -1,4 +1,4 @@
-<form action="{{ route('admin.reports.filter') }}" method="GET">
+{{-- <form action="{{ route('admin.reports.filter') }}" method="GET">
     @csrf
     <!-- Filter by Department -->
     <label for="department">Department:</label>
@@ -26,4 +26,4 @@
     <input type="date" name="end_date" id="end_date">
     
     <button type="submit" class="btn btn-primary">Filter</button>
-</form>
+</form> --}}

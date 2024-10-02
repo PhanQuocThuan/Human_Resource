@@ -28,7 +28,6 @@
                         <td>{{ $history->shift ? $history->shift->Name : 'None' }}</td>
                         <td>{{ $history->StartDate }}</td>
                         <td>{{ $history->EndDate }}</td>
-                        
                     </tr>
                 @endforeach
             </tbody>
