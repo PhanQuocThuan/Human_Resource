@@ -19,22 +19,22 @@ class AdminHistoryController extends Controller
 
     public function edit($id)
     {
-        // Lấy bản ghi theo ID
+        // lấy lịch sử theo id
         $history = History::findOrFail($id);
-        // Truyền thông tin vào view chỉnh sửa
+        // truyền thông tin vào view chỉnh sửa
         return view('admin.histories.edit', compact('history'));
     }
 
     public function update(Request $request, $id)
     {
-        // Xác thực dữ liệu
+        // nhập thông tin
         $request->validate([
             'StartDate' => 'required|date',
             'EndDate' => 'required|date|after_or_equal:StartDate',
-            // Thêm các quy tắc xác thực khác nếu cần
+            
         ]);
 
-        // Cập nhật bản ghi
+        // cập nhật bản ghi
         $history = History::findOrFail($id);
         $history->update($request->all());
 
@@ -42,15 +42,15 @@ class AdminHistoryController extends Controller
     }
     public function showHistory($employeeId)
     {
-        $history = History::with('department', 'shift')
+        $history = History::with('department', 'shift')//thông qua Model history sử dụng các mối quan hệ (function)
             ->where('BusinessEntityID', $employeeId)
-            ->orderBy('StartDate', 'desc')
+            ->orderBy('StartDate', 'desc')//sắp sếp
             ->get();
 
         $employee = Employee::findOrFail($employeeId);
 
         $viewData = [
-            'title' => 'Lịch sử thay đổi của nhân viên ' . $employee->NationalIDNumber,
+            'title' => 'Employee Change History: ' . $employee->BusinessEntityID,
             'employee' => $employee,
             'history' => $history,
         ];

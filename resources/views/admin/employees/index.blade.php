@@ -14,8 +14,8 @@
 <table class="table">
     <thead>
         <tr>
+            <th>ID</th>
             <th>National ID</th>
-            <th>Login ID</th>
             <th>Job Title</th>
             <th>Birth Date</th>
             <th>Actions</th>
@@ -24,8 +24,8 @@
     <tbody>
         @foreach ($viewData['employees'] as $employee)
         <tr>
+            <th>{{ $employee->BusinessEntityID }}
             <td>{{ $employee->NationalIDNumber }}</td>
-            <td>{{ $employee->LoginID }}</td>
             <td>{{ $employee->JobTitle }}</td>
             <td>{{ $employee->BirthDate }}</td>
             <td>

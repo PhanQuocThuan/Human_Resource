@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Shift extends Model
 {
     protected $primaryKey = 'ShiftID';
-    protected $fillable = ['Name', 'StartDate', 'EndDate'];
+    protected $fillable = ['Name', 'StartTime', 'EndTime'];
 
     public function employeeHistories()
     {

@@ -61,15 +61,15 @@ Route::resource('admin/shifts', AdminShiftController::class)
 Route::post('admin/shifts/{shift}/assign', [AdminShiftController::class, 'assign'])->name('admin.shifts.assign');
 
 Route::resource('admin/reports', AdminReportController::class)
-    ->only(['index']) // Chỉ sử dụng route index mặc định cho trang tổng quan báo cáo
+    ->only(['index'])
     ->names([
-        'index' => 'admin.reports.index', // Đặt tên cho trang tổng quan
+        'index' => 'admin.reports.index', 
     ]);
 
-// Các route đặc biệt cho báo cáo cụ thể
 Route::get('/admin/reports/employees', [AdminReportController::class, 'employeeReport'])->name('admin.reports.employees');
 Route::get('/admin/reports/departments', [AdminReportController::class, 'departmentReport'])->name('admin.reports.departments');
 Route::get('/admin/reports/shifts', [AdminReportController::class, 'shiftReport'])->name('admin.reports.shifts');
+Route::get('/admin/reports/filter', [AdminReportController::class, 'filter'])->name('admin.reports.filter');
 
 Route::get('/admin/histories', [AdminHistoryController::class, 'index'])->name('admin.histories.index');
 Route::get('/admin/histories/{id}/edit', [AdminHistoryController::class, 'edit'])->name('admin.histories.edit');

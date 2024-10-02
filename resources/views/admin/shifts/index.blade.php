@@ -30,7 +30,7 @@
                                 @method('DELETE')
                                 <button type="submit" class="btn btn-danger" onclick="return confirm('Bạn có chắc chắn muốn xóa không?')">Delete</button>
                             </form>
-                            <a href="{{ route('admin.shifts.show', $shift->ShiftID) }}" class="btn btn-secondary">View Shift</a>
+                            <a href="{{ route('admin.shifts.show', $shift->ShiftID) }}" class="btn btn-secondary">Assignment</a>
                         </td>
                     </tr>
                 @endforeach

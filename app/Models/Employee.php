@@ -8,9 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class Employee extends Model
 {
     use HasFactory;
-    protected $table = 'employees'; // Đảm bảo rằng bạn sử dụng đúng tên bảng
-    protected $primaryKey = 'BusinessEntityID'; // Đặt khóa chính nếu nó khác với 'id'
-    public $timestamps = false; // Tắt tính năng timestamps
+    protected $table = 'employees';
+    protected $primaryKey = 'BusinessEntityID';
 
     protected $fillable = [
         'NationalIDNumber',

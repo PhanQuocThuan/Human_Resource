@@ -12,11 +12,16 @@ use Illuminate\Http\Request;
 class AdminReportController extends Controller
 {
     public function index (){
-        $viewData =[
+        $departments = Department::all();
+        $shifts = Shift::all();
+        $viewData = [
             'title' => 'Admin Page - Report',
+            'departments' => $departments,
+            'shifts' => $shifts,
+            'results' => [],
         ];
 
-        return view('admin.reports.index') -> with('viewData', $viewData);
+        return view('admin.reports.index')->with('viewData', $viewData);
     }
 
     public function employeeReport(){
@@ -46,6 +51,35 @@ class AdminReportController extends Controller
         ];
         
         return view('admin.reports.shifts') -> with('viewData', $viewData);
+    }
+
+    public function filter(Request $request)
+    {
+        $departmentId = $request->input('department_id');
+        $shiftId = $request->input('shift_id');
+        $startDate = $request->input('start_date');
+        $endDate = $request->input('end_date');
+
+        $query = History::with(['department', 'shift', 'employee']);
+        if (!empty($departmentId)) {
+            $query->where('DepartmentID', $departmentId);
+        }
+        if (!empty($shiftId)) {
+            $query->where('ShiftID', $shiftId);
+        }
+        if (!empty($startDate) && !empty($endDate)) {
+            $query->whereBetween('StartDate', [$startDate, $endDate]);
+        }
+        $filteredResults = $query->get();
+        $departments = Department::all();
+        $shifts = Shift::all();
+
+        return view('admin.reports.index', [
+            'title' => 'Admin Page - Report',
+            'results' => $filteredResults,
+            'departments' => $departments,
+            'shifts' => $shifts,
+        ]);
     }
 
 }

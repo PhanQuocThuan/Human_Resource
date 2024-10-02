@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="container">
-        <h1>Lịch sử thay đổi</h1>
+        <h1>History Change</h1>
 
         @if(session('success'))
             <div class="alert alert-success">
@@ -13,22 +13,22 @@
         <table class="table table-bordered">
             <thead>
                 <tr>
-                    <th>ID</th>
-                    <th>Phòng ban</th>
-                    <th>Ca làm việc</th>
-                    <th>Ngày bắt đầu</th>
-                    <th>Ngày kết thúc</th>
-                    <th>Hành động</th>
+                    {{-- <th>ID</th> --}}
+                    <th>Department</th>
+                    <th>Shift</th>
+                    <th>Start Date</th>
+                    <th>End Date</th>
                 </tr>
             </thead>
             <tbody>
                 @foreach ($histories as $history)
                     <tr>
-                        <td>{{ $history->id }}</td>
-                        <td>{{ $history->department ? $history->department->Name : 'Không xác định' }}</td>
-                        <td>{{ $history->shift ? $history->shift->Name : 'Không xác định' }}</td>
+                        {{-- <td>{{ $history->id }}</td> --}}
+                        <td>{{ $history->department ? $history->department->Name : 'None' }}</td>
+                        <td>{{ $history->shift ? $history->shift->Name : 'None' }}</td>
                         <td>{{ $history->StartDate }}</td>
                         <td>{{ $history->EndDate }}</td>
+                        
                     </tr>
                 @endforeach
             </tbody>

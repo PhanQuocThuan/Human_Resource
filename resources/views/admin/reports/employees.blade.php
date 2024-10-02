@@ -27,7 +27,7 @@
                         <th>{{$employee->JobTitle}}</th>
                         <th>
                             <a href="{{ route('admin.histories.show', ['employeeId' => $employee->BusinessEntityID]) }}" class="btn btn-info">
-                                Xem lịch sử
+                                Show History
                             </a>                            
                         </th>
                     </tr>

@@ -14,10 +14,11 @@ class AdminEmployeeController extends Controller
         $viewData["title"] = "Admin Page - Employees Management";
         if ($request->has('search')) {
             $search = $request->query('search');
-            $viewData["employees"] = Employee::where('NationalIDNumber', 'like', '%' . $search . '%')
+            $viewData["employees"] = Employee::where('NationalIDNumber', 'like', '%' . $search . '%')//tìm theo nationalID
                 ->orWhere('LoginID', 'like', '%' . $search . '%')
                 ->orWhere('JobTitle', 'like', '%' . $search . '%')
                 ->orWhere('BirthDate', 'like', '%' . $search . '%')
+                ->orWhere('BusinessEntityID', 'like', '%' . $search . '%')
                 ->get();
         } else {
             // Nếu không có tìm kiếm, lấy tất cả nhân viên
@@ -35,9 +36,9 @@ class AdminEmployeeController extends Controller
         return view('admin.employees.create')->with("viewData", $viewData);
     }
 
-    public function store(Request $request)
+    public function store(Request $request, $id)
     {
-        // Validate form inputs
+        // thông tin nhập vào form
         $request->validate([
             "NationalIDNumber" => "required|max:100",
             "LoginID" => "required|max:255",
@@ -47,8 +48,7 @@ class AdminEmployeeController extends Controller
             "Gender" => "required|in:M,F",
             "HireDate" => "required|date",
         ]);
-
-        // Tạo nhân viên với dữ liệu từ form
+        // tạo nhân viên với dữ liệu từ form
         Employee::create($request->only([
             "NationalIDNumber", 
             "LoginID", 
@@ -57,6 +57,7 @@ class AdminEmployeeController extends Controller
             "MaritalStatus", 
             "Gender", 
             "HireDate",
+            'created_at' => now(), 
         ]));
 
         return redirect()->route('admin.employees.index')->with('success', 'Employee added successfully!');
@@ -64,7 +65,7 @@ class AdminEmployeeController extends Controller
 
     public function show($id)
     {
-        $employee = Employee::findOrFail($id);
+        $employee = Employee::findOrFail($id);//tìm id của nhân viên
         $viewData = [
             "title" => "Employee Details",
             "employee" => $employee
@@ -84,6 +85,7 @@ class AdminEmployeeController extends Controller
 
     public function update(Request $request, $id)
     {
+        //thông tin nhập vào để sửa
         $request->validate([
             "NationalIDNumber" => "required|max:100",
             "LoginID" => "required|max:255",
@@ -98,9 +100,9 @@ class AdminEmployeeController extends Controller
             "SickLeaveHours" => "nullable|integer|min:0",
         ]);
     
-        $employee = Employee::findOrFail($id);
-        $employee->ModifiedDate = now();
-        $employee->update($request->only([
+        $employee = Employee::findOrFail($id);//tìm nhân viên 
+        $employee->ModifiedDate = now();//ngày chỉnh sửa là hiện tại khi click vào
+        $employee->update($request->only([//update thông tin nhân viên
             "NationalIDNumber", 
             "LoginID", 
             "JobTitle", 
@@ -111,7 +113,9 @@ class AdminEmployeeController extends Controller
             "OrganizationNode",
             "OrganizationLevel",
             "VacationHours",
-            "SickLeaveHours",
+            "SickLeaveHours", 
+            'updated_at' => now(),
+            
         ]));
     
         return redirect()->route('admin.employees.index')->with('success', 'Employee updated successfully!');
@@ -119,8 +123,8 @@ class AdminEmployeeController extends Controller
 
     public function destroy($id)
     {
-        $employee = Employee::findOrFail($id); // Tìm nhân viên cần xóa
-        $employee->delete(); // Thực hiện xóa nhân viên
+        $employee = Employee::findOrFail($id); // tìm nhân viên
+        $employee->delete(); // thực hiện xóa nhân viên
 
         return redirect()->route('admin.employees.index')->with('success', 'Employee deleted successfully!');
     }

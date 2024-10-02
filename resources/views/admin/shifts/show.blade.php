@@ -19,7 +19,7 @@
             <option value="{{ $employee->BusinessEntityID }}">{{ $employee->NationalIDNumber }}</option>
         @endforeach
     </select>
-    <button type="submit" class="btn btn-primary">Assign Shift</button>
+    <button type="submit" class="btn btn-primary">Assignment</button>
 </form>
 
 <a href="{{ route('admin.shifts.index') }}" class="btn btn-secondary">Back to Shifts List</a>
