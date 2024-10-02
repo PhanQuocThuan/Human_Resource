@@ -59,7 +59,7 @@ class AdminDepartmentController extends Controller
         Department::create($request->only([
             "Name", 
             "GroupName", 
-            'created_at' => now(), 
+            'created_at' => now(), //khi tạo 1 nhân viên mới tự động cho tg hiện tại ở cột created_at
         ]));
         //trả đối tượng về 1 hướng cụ thể (redirect) hướng này là route
         return redirect()->route('admin.departments.index')->with('success', 'Department added successfully!');

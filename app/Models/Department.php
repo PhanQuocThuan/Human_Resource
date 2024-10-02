@@ -22,8 +22,8 @@ class Department extends Model
         return $this->hasMany(HistoryController::class, 'department_id');
     }
 
-    public function employees()
-    {
+    public function employees()//tg(bảng trung gian)//kn(khóa ngoại)
+    {//                                                 tg                          kn của tg,       kn của tg
         return $this->belongsToMany(Employee::class, 'employee_department_history', 'DepartmentID', 'BusinessEntityID');
     }
 

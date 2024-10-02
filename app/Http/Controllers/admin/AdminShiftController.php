@@ -80,7 +80,6 @@ class AdminShiftController extends Controller
     {
         $request->validate([
             'employee_ids' => 'required|array',
-            'employee_ids.*' => 'exists:employees,BusinessEntityID', // kiểm tra tồn tại
         ]);
         $shift =Shift::findOrFail($shiftId);
 
@@ -101,7 +100,7 @@ class AdminShiftController extends Controller
     public function storeAssignment(Request $request, $id)
     {
         $shift = Shift::findOrFail($id);//chọn id
-        $shift->employees()->sync($request->input('employees')); // phân công công việc
+        $shift->employees()->sync($request->input('employees')); // thông qua quan hệ employees(function) và đồng bộ hóa bảng trung gian
         return redirect()->route('admin.shifts.index')->with('success', 'Shift assignments updated!');
     }
 

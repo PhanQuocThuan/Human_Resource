@@ -27,7 +27,7 @@ class Employee extends Model
 
     public function employeeDepartmentHistories()
     {
-        return $this->hasMany(History::class, 'employee_id'); // Quan hệ 1-nhiều với EmployeeDepartmentHistory
+        return $this->hasMany(History::class, 'employee_id');
     }
 
     public function getId()

@@ -22,14 +22,14 @@ class AdminReportController extends Controller
         // ];
 
         // return view('admin.reports.index')->with('viewData', $viewData);
-        $departmentId = $request->input('department_id');
+        $departmentId = $request->input('department_id');//lấy từ name trong trang index
         $shiftId = $request->input('shift_id');
         $startDate = $request->input('start_date');
         $endDate = $request->input('end_date');
 
-        $query = History::with(['department', 'shift', 'employee']);
-        if (!empty($departmentId)) {
-            $query->where('DepartmentID', $departmentId);
+        $query = History::with(['department', 'shift', 'employee']);//các function tạo trong Histoty
+        if (!empty($departmentId)) {//xác định department có rỗng hay không nếu không sẽ truy vấn từ Model History
+            $query->where('DepartmentID', $departmentId);//nếu không rỗng thì thực hiện lệnh
         }
         if (!empty($shiftId)) {
             $query->where('ShiftID', $shiftId);
@@ -37,11 +37,11 @@ class AdminReportController extends Controller
         if (!empty($startDate) && !empty($endDate)) {
             $query->whereBetween('StartDate', [$startDate, $endDate]);
         }
-        $filteredResults = $query->get();
+        $filteredResults = $query->get();//truy vấn và lấy toàn bộ dữ liệu phù hợp đã chọn từ các if
         $departments = Department::all();
         $shifts = Shift::all();
 
-        return view('admin.reports.index', [
+        return view('admin.reports.index', [//xuất dữ liệu qua trang index
             'title' =>'Page Admin - Report',
             'results' => $filteredResults,
             'departments' => $departments,
@@ -60,7 +60,7 @@ class AdminReportController extends Controller
     }
 
     public function departmentReport(){
-        $departments = Department::with('employees') -> get();//lấy toàn bộ danh phòng ban và nhân viên
+        $departments = Department::with('employees') -> get();//lấy toàn bộ danh phòng ban thông qua quan hệ employees trong Model
         $viewData =[
             'title' =>'Department Report',
             'departments' => $departments,

@@ -10,6 +10,7 @@
 
         <h3>History Changes</h3>
         @if($viewData['history']->isEmpty())
+        {{-- kiểm tra có phần tử nào không --}}
             <p>None History</p>
         @else
             <table class="table table-bordered">

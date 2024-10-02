@@ -4,6 +4,7 @@
 <div class="container">
     <h1>{{ $viewData['title'] }}</h1>
     <form action="{{ route('admin.departments.store') }}" method="POST">
+        {{-- chỉ định method post là gửi dữ liệu --}}
         @csrf
         <div class="form-group">
             <label for="Name">Name</label>

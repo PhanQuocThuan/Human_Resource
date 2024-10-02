@@ -7,7 +7,8 @@
     <h1>{{ $viewData['title'] }}</h1>
     <form action="{{ route('admin.departments.update', ['department' => $viewData['department']->DepartmentID]) }}" method="POST">
         @csrf
-        @method('PUT')
+        @method('PUT') 
+        {{-- method put dành cho cập nhật --}}
         <div class="form-group">
             <label for="Name">Name</label>
             <input type="text" class="form-control" name="Name" value="{{ $viewData['department']->Name }}" required>
